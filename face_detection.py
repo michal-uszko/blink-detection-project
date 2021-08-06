@@ -4,7 +4,7 @@ import time
 import imutils
 from imutils import face_utils
 
-EAR_THRESHOLD = 0.3
+EAR_THRESHOLD = 0.25
 FRAMES_IN_A_ROW = 2
 
 
@@ -23,7 +23,7 @@ predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 (left_eye_start, left_eye_end) = face_utils.FACIAL_LANDMARKS_68_IDXS["left_eye"]
 (right_eye_start, right_eye_end) = face_utils.FACIAL_LANDMARKS_68_IDXS["right_eye"]
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 time.sleep(2.0)
 
 frames_counter = 0
@@ -31,7 +31,7 @@ total_blinks = 0
 
 while True:
     ret, frame = cap.read()
-    frame = imutils.resize(frame, width=1280)
+    frame = imutils.resize(frame, width=800)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     rects = detector(gray, 0)
